@@ -28,3 +28,14 @@ export function verifyJwt(token: string): Promise<JwtData> {
     });
   });
 }
+
+export async function userIdByJwtToken(token: string) {
+  if (!token) {
+    return null;
+  }
+  const jwtData = await verifyJwt(token);
+  if (!jwtData) {
+    return null;
+  }
+  return jwtData.id;
+}

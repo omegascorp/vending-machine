@@ -2,7 +2,7 @@
 
 ## Requirments
 
-* Node 12+
+* Node 12.20+ or 14.13+ or 16+
 * Yarn
 * Docker
 

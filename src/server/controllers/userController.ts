@@ -2,7 +2,7 @@ import { Request } from "express";
 import Joi from "joi";
 import { userModel } from "../models/userModel";
 import { sha256 } from "../services/cryptoService";
-import { validateSchema } from "../services/joiService";
+import { validateSchema } from "../validators/schemaValidator";
 
 
 export async function createUserApi(req: Request) {

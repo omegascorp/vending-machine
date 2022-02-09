@@ -1,5 +1,5 @@
 import Joi from "joi";
-import { ValidationError } from "./routerErrorService";
+import { ValidationError } from "../services/routerErrorService";
 
 export function validateSchema<T>(value: any, schema: Joi.Schema): T {
   const result = schema.validate(value);

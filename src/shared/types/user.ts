@@ -1,7 +1,6 @@
 export enum UserRole {
-  user = "user",
-  customer = "customer",
-  admin = "admin",
+  seller = "seller",
+  buyer = "buyer",
 }
 export interface User {
   _id?: string;

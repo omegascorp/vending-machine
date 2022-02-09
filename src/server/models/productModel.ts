@@ -19,4 +19,4 @@ const productSchema = new mongoose.Schema({
   timestamps: true,
 });
 
-export const projectModel = connection.model<ProductDocument>("project", productSchema);
+export const productModel = connection.model<ProductDocument>("product", productSchema);
