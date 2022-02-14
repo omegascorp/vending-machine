@@ -14,9 +14,9 @@ async function redirectHome(req: express.Request, res: express.Response) {
   res.redirect("/");
 }
 
-router.get("/login", passport.authenticate("local"), redirectHome);
+router.post("/login", passport.authenticate("local"), redirectHome);
 
-router.get("/logout", (req: express.Request, res: express.Response) => {
+router.post("/logout", (req: express.Request, res: express.Response) => {
   res.cookie("token", "");
   res.redirect("/");
 });

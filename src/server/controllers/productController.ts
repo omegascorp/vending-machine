@@ -39,26 +39,58 @@ export async function createProductApi(req: Request, user: User) {
   };
 }
 
-export async function editProductApi(req: Request, user: User) {
+export async function updateProductApi(req: Request, user: User) {
+  const params = validateSchema<{
+    id: string;
+  }>(req.params, Joi.object({
+    id: Joi.string(),
+  }));
   const body = validateSchema<Partial<Product>>(req.body, Joi.object({
     productName: Joi.string(),
     amountAvailable: Joi.number(),
     cost: Joi.string(),
   }));
 
-  const product = await productModel.create({
-    productName: body.productName,
-    amountAvailable: body.amountAvailable,
-    cost: body.cost,
-    
-    sellerId: user._id,
-  });
+  const product = await productModel.findById(params.id);
 
   checkProductEditAccess(user, product);
 
+  const updatedProduct = await productModel.updateOne({
+    productName: body.productName,
+    amountAvailable: body.amountAvailable,
+    cost: body.cost,
+  }, {
+    new: true,
+  });
 
 
   return {
-    json: product,
+    json: updatedProduct,
+  };
+}
+
+export async function deleteProductApi(req: Request, user: User) {
+  const params = validateSchema<{
+    id: string;
+  }>(req.params, Joi.object({
+    id: Joi.string(),
+  }));
+  const body = validateSchema<Partial<Product>>(req.body, Joi.object({
+    productName: Joi.string(),
+    amountAvailable: Joi.number(),
+    cost: Joi.string(),
+  }));
+
+  const product = await productModel.findById(params.id);
+
+  checkProductEditAccess(user, product);
+
+  await productModel.deleteOne({
+    _id: params.id,
+  });
+
+
+  return {
+    json: {},
   };
 }
